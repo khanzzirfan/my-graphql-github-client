@@ -7,22 +7,18 @@ import githubSVG from "../github.svg";
 class HeaderComponent extends Component {
     render() {
         return (
-            <div className="row text-center">
-                <div className="col-md-3">
-                </div>
-                <div className="col-md-5">
-                    <div className="input-group mb-2 mr-sm-2">
-                        <span className="input-group-addon" id="basic-addon3">
-                            <img src={githubSVG} alt="logo"  className={"github-logo mr-1"} />        
+            <div className="row justify-content-center">
+                <div className="col-lg-offset-3 col-lg-4">
+                    <div className="input-group">
+                        <span className="input-group-btn">
+                            <img src={githubSVG} className="github-logo" alt="logo" />
                         </span>
-                        <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" />
-                        <button type="submit" className="btn btn-primary mb-2 ml-2">Submit</button>
+                        <input type="text" className="form-control" placeholder="search github" />
+                        <span className="input-group-btn">
+                            <button className="btn btn-secondary" type="button">Search</button>
+                        </span>
                     </div>
                 </div>
-                <div className="col-md-2">
-                    
-                </div>
-
             </div>
         );
     }
