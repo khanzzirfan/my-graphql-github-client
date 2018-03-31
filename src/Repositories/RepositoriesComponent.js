@@ -37,7 +37,7 @@ class RepositoriesComponent extends Component {
 }
 
 RepositoriesComponent.propTypes = {
-
+    searchText: PropTypes.string
 };
 
 
