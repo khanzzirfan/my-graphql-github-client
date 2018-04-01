@@ -10,13 +10,17 @@ import { BrowserRouter } from 'react-router-dom'
 import Search from "../components/Search";
 import HeaderComponent from "../Header/HeaderComponent";
 import RepositoriesComponent from "../Repositories/RepositoriesComponent";
+import OrganizationComponent from "../Organization/OrganizationComponent";
+import ProfileComponent from "../Profile/ProfileComponent";
+
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchText: "",
-      isProfileSelected:true,
+      isProfileSelected: true,
     }
 
   }
@@ -26,11 +30,15 @@ class App extends Component {
   }
 
   handleOnProfileClicked = (val) => {
-    this.setState({isProfileSelected: true});
+    this.setState({ isProfileSelected: true });
   }
 
   handleOnOrgClicked = (val) => {
-    this.setState({isProfileSelected: false});
+    this.setState({ isProfileSelected: false });
+  }
+
+  handleOnSearch = (val) => {
+    this.setState({ searchText: val });
   }
 
   render() {
@@ -44,7 +52,7 @@ class App extends Component {
                 <img src={logo} className="App-logo " alt="logo" />
                 <img src={graphQLSvg} className="App-logo m1" alt="logo" />
                 <img src={apolloSvg} className="App-logo m1" alt="logo" />
-                
+
                 <h1 className="App-title">React app with graphql and apollo client</h1>
               </div>
             </div>
@@ -54,18 +62,27 @@ class App extends Component {
 
         <header className="bg-dark text-white mtop-10 justify-content-center pb-3">
           <div className="container">
-            <HeaderComponent 
-              isProfileSelected= {isProfileSelected}
-              onProfileClicked = {this.handleOnProfileClicked}
-              onOrganizationClicked = {this.handleOnOrgClicked}
+            <HeaderComponent
+              isProfileSelected={isProfileSelected}
+              onProfileClicked={this.handleOnProfileClicked}
+              onOrganizationClicked={this.handleOnOrgClicked}
+              onSearchChange={this.handleOnSearch}
+              searchText={this.state.searchText}
             />
           </div>
         </header>
 
         <div className="ph3 pv1 background-gray">
           <Switch>
-            <Route exact path="/" component={() => <div>
-              <RepositoriesComponent search={searchText} />
+            <Route exact path="/" component={() => 
+            <div>
+              {
+                !!(isProfileSelected) ? <ProfileComponent /> :
+                  <OrganizationComponent 
+                    organization = {searchText}
+                  />
+              }
+              
             </div>}
             />
             <Route exact path="/search" component={Search} />

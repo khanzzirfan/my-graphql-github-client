@@ -11,18 +11,27 @@ class HeaderComponent extends Component {
         }
     }
 
-    handleDropDown= () => {
-        this.setState({show: true});
+    handleDropDown = () => {
+        this.setState({ show: true });
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({show: false});
+    componentWillReceiveProps(nextProps) {
+        this.setState({ show: false });
+    }
+
+    handleOnSearchChange = (e) => {
+        let value = e.target.value;
+        this.props.onSearchChange(value);
     }
 
     render() {
-        const { onProfileClicked,
+        const { 
+            onProfileClicked,
             onOrganizationClicked,
-            isProfileSelected } = this.props;
+            isProfileSelected,
+            searchText,
+            onSearchChange
+         } = this.props;
 
         let dropdownText = isProfileSelected === true ? "Profile" : "Organization";
         return (
@@ -33,14 +42,14 @@ class HeaderComponent extends Component {
                             <span className="input-group-btn">
                                 <img src={githubLogo} className="github-logo" alt="logo" />
                             </span>
-                            <input type="text" className="form-control" placeholder="search github" />
-                            <div className={`input-group-append ${this.state.show ? "show": ""}`}>
+                            <input type="text" className="form-control" placeholder="search github" value={searchText} onChange={this.handleOnSearchChange}/>
+                            <div className={`input-group-append ${this.state.show ? "show" : ""}`}>
                                 <button type="button" className="btn bg-white btn-outline-secondary selected-dropdown">{dropdownText}</button>
                                 <button type="button" className="btn bg-white btn-outline-secondary dropdown-toggle dropdown-toggle-split"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.handleDropDown}>
                                     <span className="sr-only">Toggle Dropdown</span>
                                 </button>
-                                <div className={`dropdown-menu ${this.state.show? "show": ""}`}>
+                                <div className={`dropdown-menu ${this.state.show ? "show" : ""}`}>
                                     <a className="dropdown-item" href="javascript:void(0)" onClick={onProfileClicked}>Profile</a>
                                     <a className="dropdown-item" href="javascript:void(0)" onClick={onOrganizationClicked}>Organization</a>
                                 </div>
