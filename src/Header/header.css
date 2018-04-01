@@ -4,3 +4,14 @@
     padding:3px;
 }
 
+.input-group-append .dropdown-menu{
+    left:auto !important;
+}
+
+.btn-outline-secondary:active{
+    color:black !important;
+}
+
+.selected-dropdown {
+    min-width: 120px;
+}
