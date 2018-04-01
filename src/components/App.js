@@ -15,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: ""
+      searchText: "",
+      isProfileSelected:true,
     }
 
   }
@@ -24,17 +25,25 @@ class App extends Component {
     this.setState({ searchText: val });
   }
 
+  handleOnProfileClicked = (val) => {
+    this.setState({isProfileSelected: true});
+  }
+
+  handleOnOrgClicked = (val) => {
+    this.setState({isProfileSelected: false});
+  }
+
   render() {
-    const { searchText } = this.state;
+    const { searchText, isProfileSelected } = this.state;
     return (
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
           <div className="container justify-content-center">
             <div className="row">
               <div className="bg-dark text-white">
-                <img src={logo} className="App-logo" alt="logo" />
-                <img src={graphQLSvg} className="App-logo" alt="logo" />
-                <img src={apolloSvg} className="App-logo" alt="logo" />
+                <img src={logo} className="App-logo " alt="logo" />
+                <img src={graphQLSvg} className="App-logo m1" alt="logo" />
+                <img src={apolloSvg} className="App-logo m1" alt="logo" />
                 
                 <h1 className="App-title">React app with graphql and apollo client</h1>
               </div>
@@ -43,9 +52,13 @@ class App extends Component {
           </div>
         </nav>
 
-        <header className="bg-dark text-white mtop-10 justify-content-center">
+        <header className="bg-dark text-white mtop-10 justify-content-center pb-3">
           <div className="container">
-            <HeaderComponent />
+            <HeaderComponent 
+              isProfileSelected= {isProfileSelected}
+              onProfileClicked = {this.handleOnProfileClicked}
+              onOrganizationClicked = {this.handleOnOrgClicked}
+            />
           </div>
         </header>
 
